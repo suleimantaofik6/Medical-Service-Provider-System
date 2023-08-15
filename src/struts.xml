@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+    
+<struts>
+	<package name="productManagementApp" extends="struts-default">
+		<interceptors>
+			<interceptor class="it.unicas.products.interceptors.LoginInterceptor"
+				name="loginInterceptor" />
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="loginStack"/>
+		<action name="loginAction" class="it.unicas.products.action.LoginAction">
+			<result name="success" type="redirect">welcomeAction?userName=${userName}</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="logoutAction" class="it.unicas.products.action.LogoutAction">
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="welcomeAction" class="it.unicas.products.action.WelcomeAction">
+			<result name="success">/welcome.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+		<action name="SelectPatientData" class="it.unicas.products.action.patients.SelectPatientData">
+			<result name="success">/Patient_Menue.jsp</result>
+			<result name="input">/login.jsp</result>
+		</action>
+
+		<action name="addActionPatient" class="it.unicas.products.action.patients.AddAction">
+			<result name="success" type="redirect">SelectPatientData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/addPatient.jsp</result>
+		</action>
+
+		<action name="addAction" class="it.unicas.products.action.AddAction">
+			<result name="success" type="redirect">welcomeAction</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/addProduct.jsp</result>
+		</action>
+		<action name="updateDataAction" class="it.unicas.products.action.UpdateDataAction">
+			<result name="success">/updateProduct.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="updateAction" class="it.unicas.products.action.UpdateAction">
+			<result name="success" type="redirect">welcomeAction</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/updateProduct.jsp</result>
+		</action>
+		<action name="deleteAction" class="it.unicas.products.action.DeleteAction">
+			<result name="success" type="redirect">welcomeAction</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="DeletePatient" class="it.unicas.products.action.patients.DeletePatient">
+			<result name="success" type="redirect">SelectPatientData</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="updatePatientInterface" class="it.unicas.products.action.patients.UpdatePatientInterface">
+			<result name="success">/updatePatient.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="updatePatient" class="it.unicas.products.action.patients.UpdatePatient">
+			<result name="success" type="redirect">SelectPatientData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/updateProduct.jsp</result>
+		</action>
+
+<!--      beganing of the Doctors Actions -->
+		<action name="addActionDoctor" class="it.unicas.products.action.Doctors.AddDoctor">
+			<result name="success" type="redirect">SelectDoctorData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/DoctorAdd.jsp</result>
+		</action>
+
+		<action name="SelectDoctorData" class="it.unicas.products.action.Doctors.SelectDoctorData">
+			<result name="success">/Doctors_Menue.jsp</result>
+			<result name="input">/login.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="DeleteDoctors" class="it.unicas.products.action.Doctors.DeleteDoctors">
+			<result name="success" type="redirect">SelectDoctorData</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="UpdateDoctorsInterface" class="it.unicas.products.action.Doctors.UpdateDoctorsInterface">
+		<result name="success">/DoctorUpdate.jsp</result>
+		<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="UpdateDoctors" class="it.unicas.products.action.Doctors.UpdateDoctors">
+			<result name="success" type="redirect">SelectDoctorData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/DoctorUpdate.jsp</result>
+		</action>
+
+		<!-- end of the doctors action -->
+
+		<!--		beganinig of users-->
+		<action name="AddUser" class="it.unicas.products.action.Login.AddUser">
+			<result name="success" type="redirect">SelectUsersData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">loginAdd.jsp</result>
+		</action>
+
+		<action name="SelectUsersData" class="it.unicas.products.action.Login.SelectUsersData">
+			<result name="success">/login_Menue.jsp</result>
+			<result name="input">/loginAdd.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="DeleteUser" class="it.unicas.products.action.Login.DeleteUser">
+			<result name="success" type="redirect">SelectUsersData</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="UpdateUserInterface" class="it.unicas.products.action.Login.UpdateUserInterface">
+			<result name="success">/loginUpdate.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+		<action name="UpdateUsers" class="it.unicas.products.action.Login.UpdateUsers">
+			<result name="success" type="redirect">SelectUsersData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/loginUpdate.jsp</result>
+		</action>
+
+
+
+
+		<!--		end of users-->
+
+		<!--		beganinig of Services-->
+		<action name="AddService" class="it.unicas.products.action.Services.AddService">
+			<result name="success" type="redirect">SelectServicesData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">ServiceAdd.jsp</result>
+		</action>
+
+		<action name="SelectServicesData" class="it.unicas.products.action.Services.SelectServicesData">
+			<result name="success">/Service_Menue.jsp</result>
+			<result name="input">/ServiceAdd.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="DeleteService" class="it.unicas.products.action.Services.DeleteService">
+			<result name="success" type="redirect">SelectServicesData</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="UpdateServiceInterface" class="it.unicas.products.action.Services.UpdateServiceInterface">
+			<result name="success">/ServiceUpdate.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+
+		<action name="UpdateServices" class="it.unicas.products.action.Services.UpdateServices">
+			<result name="success" type="redirect">SelectServicesData</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/ServiceUpdate.jsp</result>
+		</action>
+
+		<!--		end of Services-->
+
+
+		<!--		beganing of Transactions //////////////////////////////////-->
+
+		<action name="TransectionSelectPatientData" class="it.unicas.products.action.patients.SelectPatientData">
+			<result name="success">/TransectionPations.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="TransectionSelectDoctorsData" class="it.unicas.products.action.Doctors.SelectDoctorData">
+			<result name="success">/TransectionDoctors.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="TransectionSelectServicesData" class="it.unicas.products.action.Services.SelectServicesData">
+			<result name="success">/TransectionServices.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="AddTransactionAction" class="it.unicas.products.action.Transactions.AddTransactionAction">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TransectionSelectMedicalRecorde</param>
+				<param name="patientId">${FK_Patient}</param>
+			</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="TransectionSelectPatientDataMenue" class="it.unicas.products.action.patients.SelectPatientData">
+			<result name="success">/TransectionMenuePatient.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="TransectionSelectMedicalRecorde" class="it.unicas.products.action.Transactions.SelectTransection">
+			<result name="success">/TransectionMedicalRecords.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+
+		<action name="TransectionDeleteMedicalRecorde" class="it.unicas.products.action.Transactions.deleteTransection">
+			<result name="success" type="redirectAction">
+				<param name="actionName">TransectionSelectMedicalRecorde</param>
+				<param name="patientId">${patientId}</param>
+			</result>			<result name="error">/error.jsp</result>
+		</action>
+
+
+
+		<!--		end of Transactions //////////////////////////////////-->
+
+
+
+
+
+
+
+		<!--		<action name="addActionPatient" class="it.unicas.products.action.patients.AddAction">-->
+<!--			<result name="success" type="redirect">/welcome.jsp</result>-->
+<!--			<result name="error">/error.jsp</result>-->
+<!--			<result name="input">/addProduct.jsp</result>-->
+<!--		</action>-->
+	</package>
+</struts>
